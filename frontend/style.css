@@ -125,8 +125,31 @@ button:active {
     margin-top: 10px;
 }
 .mutar {
-    top: 20px;
-    margin-right: 50px;
+    padding-right: 100px;
     display: flex;
     align-items: right!important;
 }
+#voltar {
+    position: fixed;         /* fixa o botão na tela */
+    top: 20px;               /* distância do topo */
+    right: 20px;             /* distância da borda direita */
+    background: none;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    padding: 10px 18px;
+    font-size: 0.9em;
+    border-radius: 8px;
+    cursor: pointer;
+    text-shadow: 0 0 10px #00ffff;
+    transition: 0.3s, transform 0.2s ease-in-out;
+    z-index: 9999;           /* garante que fique acima de tudo */
+}
+
+#voltar:hover {
+    background-color: #00ffff;
+    color: #000;
+    box-shadow: 0 0 20px #00ffff;
+}
+
+#voltar:active {
+    transform: scale(0.95);
