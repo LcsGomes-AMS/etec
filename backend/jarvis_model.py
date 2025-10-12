@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 # Cria o cliente — precisa da sua chave de API
-client = OpenAI(api_key="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")  # substitua pela sua chave real
+client = OpenAI(api_key="")  # substitua pela sua chave real
 
 
 def responder(texto_usuario):

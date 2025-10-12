@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from backend.jarvis_model import responder
+from jarvis_model import responder
 
 
 app = Flask(__name__)
