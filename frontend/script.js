@@ -1,12 +1,10 @@
 window.addEventListener("DOMContentLoaded", () => {
-
-
     // Elementos
     const statusEl = document.getElementById("status");
     const speakBtn = document.getElementById("speakBtn");
     const conversaEl = document.getElementById("conversa");
     const circleEl = document.querySelector(".circle");
-
+    const muteBtn = document.getElementById("muteBtn"); // 👈 botão mutar
 
     // Inicializa voz e reconhecimento
     const synth = window.speechSynthesis;
@@ -16,19 +14,18 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     synth.onvoiceschanged = carregarVozes;
 
-
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = "pt-BR";
     recognition.continuous = false;
     recognition.interimResults = false;
 
-
-    // Flag para controlar estado
+    // Flags de estado
     let ouvindo = false;
-
+    let isMuted = false; // 👈 controla se o som está mutado
 
     // Função para falar
     function falar(texto) {
+        if (isMuted) return; // 🔇 não fala se estiver mutado
         synth.cancel();
         const fala = new SpeechSynthesisUtterance(texto);
         fala.voice = voices[0] || null;
@@ -37,7 +34,6 @@ window.addEventListener("DOMContentLoaded", () => {
         fala.rate = 0.9;
         synth.speak(fala);
     }
-
 
     // Função para enviar comando ao backend
     async function enviarParaBackend(texto) {
@@ -55,7 +51,6 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
     // Função para adicionar mensagem no histórico
     function mostrarConversa(mensagem) {
         const p = document.createElement("p");
@@ -63,7 +58,6 @@ window.addEventListener("DOMContentLoaded", () => {
         conversaEl.appendChild(p);
         conversaEl.scrollTop = conversaEl.scrollHeight;
     }
-
 
     // Feedback visual e flag
     recognition.onstart = () => {
@@ -73,14 +67,12 @@ window.addEventListener("DOMContentLoaded", () => {
         speakBtn.disabled = true;
     };
 
-
     recognition.onend = () => {
         statusEl.textContent = "Aguardando comando...";
         circleEl.classList.remove("active");
         ouvindo = false;
         speakBtn.disabled = false;
     };
-
 
     recognition.onresult = async (event) => {
         const comando = event.results[0][0].transcript;
@@ -90,31 +82,33 @@ window.addEventListener("DOMContentLoaded", () => {
         falar(resposta);
     };
 
-
-    // Botão dispara o reconhecimento
+    // Botão de fala
     speakBtn.addEventListener("click", () => {
-        // Aborta qualquer reconhecimento ativo antes de iniciar
-        if (ouvindo) {
-            recognition.abort();
-        }
+        if (ouvindo) recognition.abort();
         recognition.start();
     });
 
+    // 👇 BOTÃO DE MUTAR / DESMUTAR
+    muteBtn.addEventListener("click", async () => {
+        isMuted = !isMuted;
+        muteBtn.textContent = isMuted ? "🔊 Ativar Som" : "🔇 Mutar";
+        if (isMuted) {
+            synth.cancel(); // interrompe fala atual
+        }
+
+        // opcional: avisar backend (se quiser sincronizar)
+        try {
+            await fetch("http://127.0.0.1:5000/set_mute", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ muted: isMuted })
+            });
+        } catch (e) {
+            console.warn("Não foi possível avisar o backend:", e);
+        }
+    });
 
     // Inicialização
     statusEl.textContent = "Sistemas online. Jarvis pronto para ouvir.";
     setTimeout(() => falar("Sistemas online. Jarvis pronto para ouvir."), 1000);
-
-
 });
-recognition.onresult = async (event) => {
-    const comando = event.results[0][0].transcript;
-    responseEl.textContent = "Você disse: " + comando;
-    const resposta = await enviarParaBackend(comando);
-    responseEl.textContent = resposta;
-    falar(resposta);
-};
-
-
-
-
