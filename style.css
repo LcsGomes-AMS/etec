@@ -3,7 +3,9 @@ body {
     color: #00ffff;
     font-family: 'Orbitron', sans-serif;
     text-align: center;
-    overflow: hidden;
+    /* REMOVA ou MUDAR para 'auto' ou 'visible' */
+    overflow: auto; /* Permite a rolagem apenas quando o conteúdo exceder a tela */
+    /* overflow: hidden; */ /* ESTE É O QUE IMPEDIA A ROLAGEM */
     display: flex;
     justify-content: center;
     flex-direction: column;
