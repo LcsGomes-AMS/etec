@@ -3,30 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jarvis IA</title>
+<title>J.A.R.V.I.S - Console</title>
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/png" href="logo.png">
 </head>
 <body>
-<div class="mutar">
-    <button id="muteBtn"> Mutar</button>
-</div>
-<div class="Voltar">
-    <button id="voltar">Voltar para biografia de J.a.r.v.i.s</button>
-</div>
-<h1>J.A.R.V.I.S</h1>
-<div id="jarvis-container">
-    <div id="ironman-3d">
-    <img src="ironman.gif" alt="Armadura do Homem de Ferro girando">
-    </div>
-    <br>
-    <br>
-    <div id="status">Inicializando sistemas...</div>
-    <div id="conversa"></div>
-    <button id="speakBtn"> Falar com Jarvis</button>
-</div>
+    <button id="voltar">⬅ Voltar</button>
+    <button id="muteBtn" class="mute-btn">🔇</button>
 
+    <h1 class="neon-title">Sistemas Ativos: <span class="neon">J.A.R.V.I.S</span></h1>
+
+    <div id="jarvis-container">
+        <div id="ironman-3d">
+            <video autoplay loop muted playsinline>
+                <source src="ironman.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+        </div>
+
+        <div id="status" class="typing"></div>
+        <div id="conversa"></div>
+
+        <button id="speakBtn" class="btn-neon">Falar com Jarvis</button>
+    </div>
 
 <script src="script.js"></script>
+<script>
+    // Animação inicial do status
+    const statusEl = document.getElementById("status");
+    const texto = "  Inicializando sistemas de voz e sensores neurais...";
+    let i = 0;
+    function digitar() {
+        if (i < texto.length) {
+            statusEl.textContent += texto.charAt(i);
+            i++;
+            setTimeout(digitar, 40);
+        }
+    }
+    digitar();
+
+    // Botão voltar
+    document.getElementById("voltar").addEventListener("click", () => {
+        window.location.href = "index.html";
+    });
+</script>
 </body>
 </html>

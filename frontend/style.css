@@ -1,99 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
 body {
-    background-color: #020b1b;
+    background-color: #010a1b;
     color: #00ffff;
     font-family: 'Orbitron', sans-serif;
-    text-align: center;
-    /* REMOVA ou MUDAR para 'auto' ou 'visible' */
-    overflow: auto; /* Permite a rolagem apenas quando o conteúdo exceder a tela */
-    /* overflow: hidden; / / ESTE É O QUE IMPEDIA A ROLAGEM */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-
-
-
-
-h1 {
-    margin-top: 60px;
-    font-size: 2.5em;
-    text-shadow: 0 0 15px #00ffff;
-}
-
-
-
-
-#jarvis-container {
-    margin-top: 80px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    min-height: 100vh;
 }
 
-
-
-
-#status {
+/* ====== TELA INICIAL ====== */
+.intro-container {
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+}
+.intro h1 {
+    font-size: 2.8em;
+    margin-top: 50px;
+}
+.intro p {
     font-size: 1.2em;
     color: #00bcd4;
 }
-
-
-
-
-#conversa {
-    margin-top: 30px;
-    font-size: 1.3em;
-    text-shadow: 0 0 10px #00ffff;
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 5px;
-    width: 80%;
-}
-
-
-
-
-.circle {
-    width: 180px;
-    height: 180px;
-    margin: 50px auto;
-    border: 3px solid #00ffff;
+.logo-jarvis {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    animation: pulse 2s infinite;
+    border: 3px solid #00ffff;
     box-shadow: 0 0 20px #00ffff;
+    animation: pulse 3s infinite;
 }
 
-
-
-
-.circle.active {
-    box-shadow: 0 0 50px #00ffff, 0 0 80px #00ffff;
-    animation: pulseActive 1.5s infinite;
-}
-
-
-
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.8; }
-}
-
-
-
-
-@keyframes pulseActive {
-    0% { transform: scale(1); opacity: 0.9; }
-    50% { transform: scale(1.3); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.9; }
-}
-
-
-
-
-button {
+/* ====== BOTÕES ====== */
+.btn-neon {
     background: none;
     border: 2px solid #00ffff;
     color: #00ffff;
@@ -102,76 +46,105 @@ button {
     border-radius: 8px;
     cursor: pointer;
     margin-top: 25px;
-    transition: 0.3s, transform 0.2s ease-in-out;
+    transition: 0.3s;
+    text-shadow: 0 0 8px #00ffff;
 }
-
-
-
-
-button:hover {
+.btn-neon:hover {
     background-color: #00ffff;
     color: #000;
-    box-shadow: 0 0 20px #00ffff;
-}
-button:active {
-    transform: scale(0.95);
-}
-.logo-jarvis {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 3px solid #00b4d8;
-    box-shadow: 0 0 15px #00b4d8;
-    margin-top: 10px;
-}
-.mutar {
-    padding-right: 100px;
-    display: flex;
-    align-items: right!important;
+    box-shadow: 0 0 25px #00ffff, 0 0 50px #00ffff;
 }
 
-#ironman-3d {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
+/* ====== CONSOLE ====== */
+.neon-title {
+    text-align: center;
+    margin-top: 40px;
+    text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
 }
-
-#ironman-3d img {
-    width: 250px;
-    height: auto;
+#jarvis-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+#ironman-3d video {
+    width: 280px;
     border-radius: 12px;
-    filter: drop-shadow(0 0 20px #00ffff);
-    
+    box-shadow: 0 0 30px #00ffff;
+    animation: rotateY 8s linear infinite;
     transform-style: preserve-3d;
 }
-
-@keyframes rotateY {
-    0% { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
+#status {
+    margin-top: 30px;
+    font-size: 1.2em;
+    color: #00bcd4;
+}
+#conversa {
+    margin-top: 20px;
+    width: 80%;
+    max-width: 500px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid #00ffff;
+    border-radius: 10px;
+    padding: 10px;
+    height: 200px;
+    overflow-y: auto;
+    box-shadow: inset 0 0 20px #00ffff;
 }
 
-#voltar {
-    position: fixed;         /* fixa o botão na tela */
-    top: 20px;               /* distância do topo */
-    right: 20px;             /* distância da borda direita */
+/* ====== BOTÕES SUPERIORES ====== */
+#voltar, .mute-btn {
+    position: fixed;
+    top: 20px;
     background: none;
     border: 2px solid #00ffff;
     color: #00ffff;
-    padding: 10px 18px;
+    padding: 8px 15px;
     font-size: 0.9em;
     border-radius: 8px;
     cursor: pointer;
-    text-shadow: 0 0 10px #00ffff;
-    transition: 0.3s, transform 0.2s ease-in-out;
-    z-index: 9999;           /* garante que fique acima de tudo */
+    transition: 0.3s;
 }
-
-#voltar:hover {
+#voltar { right: 20px; }
+.mute-btn { left: 20px; }
+#voltar:hover, .mute-btn:hover {
     background-color: #00ffff;
     color: #000;
     box-shadow: 0 0 20px #00ffff;
 }
 
-#voltar:active {
-    transform: scale(0.95);
+/* ====== ANIMAÇÕES ====== */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 1; }
+}
+@keyframes rotateY {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== EFEITO NEON ====== */
+.neon {
+    color: #00ffff;
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00b4d8,
+        0 0 40px #00b4d8;
+}
+
+/* ====== EFEITO DIGITAÇÃO ====== */
+.typing {
+    border-right: 2px solid #00ffff;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: blink 0.8s infinite;
+}
+@keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #00ffff; }
 }
