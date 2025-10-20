@@ -71,7 +71,6 @@ body {
     width: 280px;
     border-radius: 12px;
     box-shadow: 0 0 30px #00ffff;
-    animation: rotateY 8s linear infinite;
     transform-style: preserve-3d;
 }
 #status {
