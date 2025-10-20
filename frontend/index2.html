@@ -28,24 +28,6 @@
     </div>
 
 <script src="script.js"></script>
-<script>
-    // Animação inicial do status
-    const statusEl = document.getElementById("status");
-    const texto = "  Inicializando sistemas de voz e sensores neurais...";
-    let i = 0;
-    function digitar() {
-        if (i < texto.length) {
-            statusEl.textContent += texto.charAt(i);
-            i++;
-            setTimeout(digitar, 40);
-        }
-    }
-    digitar();
 
-    // Botão voltar
-    document.getElementById("voltar").addEventListener("click", () => {
-        window.location.href = "index.html";
-    });
-</script>
 </body>
 </html>

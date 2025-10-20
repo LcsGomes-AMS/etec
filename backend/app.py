@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from jarvis_model import responder
+from jarvis_model import conversar_jarvis
 
 app = Flask(__name__)
 CORS(app)
@@ -13,7 +13,7 @@ is_muted = False
 def pergunta():
     dados = request.json
     texto_usuario = dados.get("texto", "")
-    resposta = responder(texto_usuario)
+    resposta = conversar_jarvis(texto_usuario)
     return jsonify({"resposta": resposta})
 
 
