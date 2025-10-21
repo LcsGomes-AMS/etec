@@ -1,14 +1,19 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from jarvis_model import conversar_jarvis
 
-app = Flask(__name__)
+# Configura Flask com caminhos corretos para templates e static
+app = Flask(
+    __name__,
+    template_folder="../frontend/templates",
+    static_folder="../frontend/static"
+)
 CORS(app)
 
-# Variável global para o estado do som
+# Variável global para mute
 is_muted = False
 
-
+# --- API ---
 @app.route("/pergunta", methods=["POST"])
 def pergunta():
     dados = request.json
@@ -16,35 +21,26 @@ def pergunta():
     resposta = conversar_jarvis(texto_usuario)
     return jsonify({"resposta": resposta})
 
-
 @app.route("/set_mute", methods=["POST"])
 def set_mute():
-    """Rota para mutar/desmutar o Jarvis"""
     global is_muted
     dados = request.json
     is_muted = dados.get("muted", False)
-    print("🔇 Modo mudo:", is_muted)
     return jsonify({"muted": is_muted})
-
 
 @app.route("/get_mute", methods=["GET"])
 def get_mute():
-    """Rota opcional — o frontend pode perguntar se está mutado"""
     global is_muted
     return jsonify({"muted": is_muted})
 
+# --- Rotas HTML ---
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-def falar(texto):
-    """Exemplo — só fala se não estiver mutado"""
-    global is_muted
-    if is_muted:
-        print("(mutado) Jarvis:", texto)
-        return
-    print("Jarvis:", texto)
-    # Aqui você colocaria o código de fala (ex: gTTS ou pyttsx3)
-
+@app.route("/index2")
+def index2():
+    return render_template("index2.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-

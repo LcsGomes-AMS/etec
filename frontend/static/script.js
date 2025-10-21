@@ -2,7 +2,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const statusEl = document.getElementById("status");
     const speakBtn = document.getElementById("speakBtn");
     const conversaEl = document.getElementById("conversa");
-    const circleEl = document.querySelector(".circle");
     const muteBtn = document.getElementById("muteBtn");
     const voltarBtn = document.getElementById("voltar");
 
@@ -36,13 +35,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     recognition.onstart = () => {
         statusEl.textContent = "Ouvindo...";
-        circleEl.classList.add("active");
         ouvindo = true;
         speakBtn.disabled = true;
     };
     recognition.onend = () => {
         statusEl.textContent = "Aguardando comando...";
-        circleEl.classList.remove("active");
         ouvindo = false;
         speakBtn.disabled = false;
     };
@@ -63,7 +60,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     async function enviarParaBackend(texto) {
         try {
-            const res = await fetch("http://127.0.0.1:5000/pergunta", {
+            const res = await fetch("/pergunta", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ texto })
@@ -77,7 +74,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     speakBtn.addEventListener("click", () => {
-        // Primeiro clique garante que o browser permite áudio
         if (!synth.speaking && !voices.length) {
             carregarVozes();
             falar("Sistemas online. Jarvis pronto para ouvir.");
@@ -94,10 +90,10 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     voltarBtn.addEventListener("click", () => {
-        window.location.href = "index.html";
+        window.location.href = "/";
     });
 
-    // Texto inicial na tela (sem falar ainda)
+    // ====== Efeito de digitação inicial ======
     const textoInicial = "Inicializando sistemas de voz e sensores neurais...";
     let i = 0;
     function digitar() {
