@@ -4,26 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jarvis IA</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+<link rel="stylesheet" href="../static/style.css">
+<!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}"> -->
+<link rel="icon" href="../static/logo.png">
 </head>
 <body class="intro">
     <div class="intro-container">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo do Jarvis" class="logo-jarvis">
+        <img src="../static/logo.png" alt="Logo do Jarvis" class="logo-jarvis">
         <h1>Olá, eu sou o <span class="neon">J.A.R.V.I.S</span></h1>
         <p>Seu assistente virtual inteligente com voz e automação.</p>
         <button class="btn-neon" onclick="proximaPagina()">Iniciar diálogo </button>
     </div>
 
-    <audio id="start-sound" src="{{ url_for('static', filename='start.mp3') }}" preload="auto"></audio>
-
+    <audio style="display: none;" controls autoplay>
+        <source src="../static/start.mp3" type="audio/mpeg">
+    </audio>
     <script>
-        function proximaPagina(){
-            document.getElementById("start-sound").play();
-            setTimeout(() => {
-                window.location.href = "/index2";
-            }, 1500);
-        }
+    function proximaPagina(){
+            window.location.href = "{{ url_for('index2') }}";
+    }
     </script>
 </body>
 </html>
