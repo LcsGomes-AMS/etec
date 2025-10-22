@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>J.A.R.V.I.S - Console</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+<link rel="stylesheet" href="../static/style.css">
+<link rel="icon" href="../static/logo.png">
 </head>
 <body>
     <button id="voltar">⬅ Voltar</button>
@@ -16,7 +16,7 @@
     <div id="jarvis-container">
         <div id="ironman-3d">
             <video autoplay loop muted playsinline>
-                <source src="{{ url_for('static', filename='ironman.mp4') }}" type="video/mp4">
+                <source src="../static/ironman.mp4" type="video/mp4">
                 Seu navegador não suporta vídeos HTML5.
             </video>
         </div>
@@ -27,6 +27,6 @@
         <button id="speakBtn" class="btn-neon">Falar com Jarvis</button>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="../static/script.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let isMuted = false;
     let ouvindo = false;
 
+
     function carregarVozes() {
         voices = synth.getVoices().filter(v => v.lang.includes("pt"));
     }
