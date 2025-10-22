@@ -19,7 +19,7 @@
     </div>
 
     <audio style="display: none;" controls autoplay>
-        <source src="../static/start.mp3" type="audio/mpeg">
+        <source src="{{ url_for('static', filename='start.mp3') }}" type="audio/mpeg">
     </audio>
     <script>
     function proximaPagina(){
