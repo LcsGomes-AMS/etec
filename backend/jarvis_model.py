@@ -2,14 +2,14 @@ from google import genai
 import os
 
 # Inicializa o cliente Gemini (usa variável de ambiente GOOGLE_API_KEY)
-client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def conversar_jarvis(pergunta: str) -> str:
     """
     Envia a pergunta do usuário para o modelo Gemini e retorna a resposta.
     """
     try:
-        resposta = client.models.generate_content(
+        resposta = genai.models.generate_content(
             model="gemini-1.5-flash",  # modelo rápido e gratuito
             contents=f"Você é Jarvis, um assistente inteligente e prestativo. Responda de forma natural e útil: {pergunta}"
         )
